@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Xml.Linq;
 using YTArchivingGUI.Classes;
 using YTArchivingGUI.Models;
@@ -89,6 +90,8 @@ namespace YTArchivingGUI.Forms
 
             treeViewFoldersAndSubs.ExpandAll();
 
+            treeViewFoldersAndSubs.Nodes[0].EnsureVisible();
+
             disableCheckEvent = false;
         }
 
@@ -103,35 +106,64 @@ namespace YTArchivingGUI.Forms
             yTDownloader.DownloadFinishedEvent += DownloadFinishedEvent;
             yTDownloader.DownloadProgressEvent += YTDownloader_DownloadProgressEvent;
             yTDownloader.DownloadTitleEvent += YTDownloader_DownloadTitleEvent;
+            yTDownloader.DownloadConsoleLine += YTDownloader_DownloadConsoleLine;
+            yTDownloader.DownloadSkippedEvent += YTDownloader_DownloadSkippedEvent;
+            skipped = 0;
 
             listBoxTitles.Items.Clear();
 
             await yTDownloader.Download(subscription.URL, path);
         }
 
+        private void YTDownloader_DownloadConsoleLine(string line)
+        {
+            Invoke(() =>
+            {
+                if (textBoxConsole.Text.Length == 0)
+                {
+                    textBoxConsole.Text += $"{line}";
+                }
+                else
+                {
+                    textBoxConsole.Text += $"{Environment.NewLine}{line}";
+                }
+            });
+        }
+
         private void YTDownloader_DownloadTitleEvent(string titleName)
         {
-            Invoke((Action)(() =>
+            Invoke(() =>
             {
                 listBoxTitles.Items.Add(titleName);
-            }));
+            });
         }
 
         private void YTDownloader_DownloadProgressEvent(double progress)
         {
-            Invoke((Action)(() =>
+            Invoke(() =>
             {
-                progressBarDownload.Value = (int)(progress * 100);
-            }));
+                progressBarDownload.Value = (int)(progress);
+            });
         }
 
-        private void DownloadFinishedEvent(object? sender, EventArgs e)
+        private void DownloadFinishedEvent()
         {
-            Invoke((Action)(() =>
+            Invoke(() =>
             {
                 progressBarDownload.Value = 100;
                 listBoxTitles.Items.Add("Finished");
-            }));
+            });
+        }
+
+        int skipped = 0;
+
+        private void YTDownloader_DownloadSkippedEvent()
+        {
+            Invoke(() =>
+            {
+                skipped++;
+                labelSkipped.Text = $"{skipped} skipped";
+            });
         }
 
         // UI Events

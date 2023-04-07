@@ -6,9 +6,15 @@ namespace YTArchivingTool
     {
         // Delegates
 
+        public delegate void DownloadConsoleLineEventHandler(string titleName);
+
         public delegate void DownloadTitleEventHandler(string titleName);
 
         public delegate void DownloadProgressEventHandler(double progress);
+
+        public delegate void DownloadFinished();
+
+        public delegate void DownloadSkipped();
 
         // Events
 
@@ -16,7 +22,11 @@ namespace YTArchivingTool
 
         public event DownloadProgressEventHandler? DownloadProgressEvent;
 
-        public event EventHandler? DownloadFinishedEvent;
+        public event DownloadFinished? DownloadFinishedEvent;
+
+        public event DownloadSkipped? DownloadSkippedEvent;
+
+        public event DownloadConsoleLineEventHandler? DownloadConsoleLine;
 
         // Fields
 
@@ -55,7 +65,7 @@ namespace YTArchivingTool
                 CreateNoWindow = true,
             };
 
-            using Process process = new Process
+            using Process process = new()
             {
                 StartInfo = startInfo,
                 EnableRaisingEvents = true,
@@ -91,7 +101,11 @@ namespace YTArchivingTool
                 }
             });
 
+            DownloadProgressEvent?.Invoke(0);
+
             await Task.WhenAll(outputTask, errorTask);
+
+            DownloadFinishedEvent?.Invoke();
 
             process.WaitForExit();
         }
@@ -102,18 +116,28 @@ namespace YTArchivingTool
         {
             Console.WriteLine("The yt-dlp process has finished its work.");
             // Add any additional code to execute after the process has exited
-            DownloadFinishedEvent?.Invoke(sender, e);
         }
 
         private void ProcessStandardOutputLine(string line)
         {
-            if (!line.Contains("asdlkansdlk"))
+            DownloadConsoleLine?.Invoke(line);
+
+            ConsoleLineParser.ProcessLine(line, out bool? downloadSkipped, out double? progress, out string? title);
+
+            if (downloadSkipped != null && (bool)downloadSkipped)
             {
-                return;
+                DownloadSkippedEvent?.Invoke();
             }
 
-            DownloadTitleEvent?.Invoke("a title");
-            DownloadProgressEvent?.Invoke(0.5);
+            if (progress != null) 
+            {
+                DownloadProgressEvent?.Invoke((double)progress);
+            }
+
+            if (title != null)
+            {
+                DownloadTitleEvent?.Invoke(title);
+            }
         }
     }
 }

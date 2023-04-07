@@ -37,6 +37,10 @@
             buttonLoadPreset = new Button();
             progressBarDownload = new ProgressBar();
             listBoxTitles = new ListBox();
+            textBoxConsole = new TextBox();
+            labelSkipped = new Label();
+            textBox1 = new TextBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // buttonNewFolder
@@ -110,25 +114,62 @@
             // 
             // progressBarDownload
             // 
-            progressBarDownload.Location = new Point(303, 41);
+            progressBarDownload.Location = new Point(297, 54);
             progressBarDownload.Name = "progressBarDownload";
-            progressBarDownload.Size = new Size(364, 23);
+            progressBarDownload.Size = new Size(491, 23);
             progressBarDownload.TabIndex = 7;
             // 
-            // listBoTitles
+            // listBoxTitles
             // 
             listBoxTitles.FormattingEnabled = true;
             listBoxTitles.ItemHeight = 15;
-            listBoxTitles.Location = new Point(303, 70);
-            listBoxTitles.Name = "listBoTitles";
-            listBoxTitles.Size = new Size(364, 304);
+            listBoxTitles.Location = new Point(297, 83);
+            listBoxTitles.Name = "listBoxTitles";
+            listBoxTitles.Size = new Size(491, 154);
             listBoxTitles.TabIndex = 8;
+            // 
+            // textBoxConsole
+            // 
+            textBoxConsole.Location = new Point(297, 243);
+            textBoxConsole.Multiline = true;
+            textBoxConsole.Name = "textBoxConsole";
+            textBoxConsole.Size = new Size(491, 195);
+            textBoxConsole.TabIndex = 9;
+            // 
+            // labelSkipped
+            // 
+            labelSkipped.AutoSize = true;
+            labelSkipped.Location = new Point(297, 20);
+            labelSkipped.Name = "labelSkipped";
+            labelSkipped.Size = new Size(58, 15);
+            labelSkipped.TabIndex = 10;
+            labelSkipped.Text = "x Skipped";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(68, 454);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(720, 23);
+            textBox1.TabIndex = 11;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 457);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 12;
+            label1.Text = "label1";
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 493);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
+            Controls.Add(labelSkipped);
+            Controls.Add(textBoxConsole);
             Controls.Add(listBoxTitles);
             Controls.Add(progressBarDownload);
             Controls.Add(buttonLoadPreset);
@@ -141,6 +182,7 @@
             Name = "Main";
             Text = "YT Archiving";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -154,5 +196,9 @@
         private Button buttonLoadPreset;
         private ProgressBar progressBarDownload;
         private ListBox listBoxTitles;
+        private TextBox textBoxConsole;
+        private Label labelSkipped;
+        private TextBox textBox1;
+        private Label label1;
     }
 }
