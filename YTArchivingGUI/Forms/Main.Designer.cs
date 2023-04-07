@@ -36,7 +36,7 @@
             buttonSyncSelected = new Button();
             buttonLoadPreset = new Button();
             progressBarDownload = new ProgressBar();
-            listBoTitles = new ListBox();
+            listBoxTitles = new ListBox();
             SuspendLayout();
             // 
             // buttonNewFolder
@@ -117,19 +117,19 @@
             // 
             // listBoTitles
             // 
-            listBoTitles.FormattingEnabled = true;
-            listBoTitles.ItemHeight = 15;
-            listBoTitles.Location = new Point(303, 70);
-            listBoTitles.Name = "listBoTitles";
-            listBoTitles.Size = new Size(364, 304);
-            listBoTitles.TabIndex = 8;
+            listBoxTitles.FormattingEnabled = true;
+            listBoxTitles.ItemHeight = 15;
+            listBoxTitles.Location = new Point(303, 70);
+            listBoxTitles.Name = "listBoTitles";
+            listBoxTitles.Size = new Size(364, 304);
+            listBoxTitles.TabIndex = 8;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(listBoTitles);
+            Controls.Add(listBoxTitles);
             Controls.Add(progressBarDownload);
             Controls.Add(buttonLoadPreset);
             Controls.Add(buttonSyncSelected);
@@ -153,6 +153,6 @@
         private Button buttonSyncSelected;
         private Button buttonLoadPreset;
         private ProgressBar progressBarDownload;
-        private ListBox listBoTitles;
+        private ListBox listBoxTitles;
     }
 }

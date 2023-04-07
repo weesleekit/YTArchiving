@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 using YTArchivingGUI.Classes;
 using YTArchivingGUI.Models;
@@ -14,6 +15,8 @@ namespace YTArchivingGUI.Forms
         // Fields
 
         private List<SubFolder> configuration = new();
+
+        private bool disableCheckEvent = false;
 
         // Constructor
 
@@ -89,6 +92,48 @@ namespace YTArchivingGUI.Forms
             disableCheckEvent = false;
         }
 
+        private async Task StartDownload(Subscription subscription, SubFolder subFolder)
+        {
+            // TODO:Disable interface, enable cancel button
+
+            string path = $@"{subFolder.Name}\{subscription.Name}";
+
+            YTDownloader yTDownloader = new(binariesPath);
+
+            yTDownloader.DownloadFinishedEvent += DownloadFinishedEvent;
+            yTDownloader.DownloadProgressEvent += YTDownloader_DownloadProgressEvent;
+            yTDownloader.DownloadTitleEvent += YTDownloader_DownloadTitleEvent;
+
+            listBoxTitles.Items.Clear();
+
+            await yTDownloader.Download(subscription.URL, path);
+        }
+
+        private void YTDownloader_DownloadTitleEvent(string titleName)
+        {
+            Invoke((Action)(() =>
+            {
+                listBoxTitles.Items.Add(titleName);
+            }));
+        }
+
+        private void YTDownloader_DownloadProgressEvent(double progress)
+        {
+            Invoke((Action)(() =>
+            {
+                progressBarDownload.Value = (int)(progress * 100);
+            }));
+        }
+
+        private void DownloadFinishedEvent(object? sender, EventArgs e)
+        {
+            Invoke((Action)(() =>
+            {
+                progressBarDownload.Value = 100;
+                listBoxTitles.Items.Add("Finished");
+            }));
+        }
+
         // UI Events
 
         private void ButtonNewFolder_Click(object sender, EventArgs e)
@@ -161,7 +206,7 @@ namespace YTArchivingGUI.Forms
             UpdateTree();
         }
 
-        private void ButtonSyncAll_Click(object sender, EventArgs e)
+        private async void ButtonSyncAll_Click(object sender, EventArgs e)
         {
             foreach (var subFolder in configuration)
             {
@@ -172,7 +217,7 @@ namespace YTArchivingGUI.Forms
                         continue;
                     }
 
-                    StartDownload(subscription, subFolder);
+                    await StartDownload(subscription, subFolder);
                 }
             }
         }
@@ -204,7 +249,7 @@ namespace YTArchivingGUI.Forms
 
                 SubFolder subParent = (SubFolder)node.Parent.Tag;
 
-                StartDownload(subscription, subParent);
+                await StartDownload(subscription, subParent);
             }
             else
             {
@@ -225,8 +270,6 @@ namespace YTArchivingGUI.Forms
             LoadSaveManager.Save(configuration);
             UpdateTree();
         }
-
-        private bool disableCheckEvent = false;
 
         private void TreeViewFoldersAndSubs_AfterCheck(object sender, TreeViewEventArgs e)
         {
@@ -264,17 +307,6 @@ namespace YTArchivingGUI.Forms
             {
                 disableCheckEvent = false;
             }
-        }
-
-        private async void StartDownload(Subscription subscription, SubFolder subFolder)
-        {
-            YTDownloader yTDownloader = new(binariesPath);
-
-            string path = $@"{subFolder.Name}\{subscription.Name}";
-
-            // Add event hooks here
-
-            await yTDownloader.Download(subscription.URL, path);
         }
     }
 }
