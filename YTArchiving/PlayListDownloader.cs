@@ -8,7 +8,7 @@ namespace YTArchiving
         {
             string exePath = @"ExternalBinaries\yt-dlp.exe";
 
-            string arguments = @$"-S ""res:1080,fps"" -o ""{id}/%(upload_date>%Y-%m-%d)s %(title)s.%(ext)s"" --download-archive archive.txt ""https://www.youtube.com/@{id}"" --write-auto-sub --write-thumbnail";
+            string arguments = @$"-S ""res:1080,fps"" -o ""{id}/%(upload_date>%Y-%m-%d)s %(id)s %(title)s.%(ext)s"" --download-archive archive.txt ""https://www.youtube.com/@{id}"" --write-auto-sub --write-thumbnail";
 
             ProcessStartInfo startInfo = new ProcessStartInfo
             {

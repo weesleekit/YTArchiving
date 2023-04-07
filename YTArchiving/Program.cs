@@ -8,6 +8,9 @@
             {
                 "3blue1brown", // Education - Maths
                 "brandonylee", // Education - Cameras & Lighting
+                "NoclipDocs", // Documentaries - Gaming
+                "extrahistory", // Documentaries - History
+                "extracredits", // Documentaries - Gaming
             };
 
             foreach (string channel in channels)
