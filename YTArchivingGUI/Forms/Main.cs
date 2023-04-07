@@ -99,7 +99,11 @@ namespace YTArchivingGUI.Forms
         {
             // TODO:Disable interface, enable cancel button
 
-            string path = $@"{subFolder.Name}\{subscription.Name}";
+            string basePath = textBoxOutputPath.Text;
+
+            string localPath = $@"{subFolder.Name}\{subscription.Name}";
+
+            string fullPath = Path.Join(basePath, localPath);
 
             YTDownloader yTDownloader = new(binariesPath);
 
@@ -112,7 +116,7 @@ namespace YTArchivingGUI.Forms
 
             listBoxTitles.Items.Clear();
 
-            await yTDownloader.Download(subscription.URL, path);
+            await yTDownloader.Download(subscription.URL, fullPath, basePath);
         }
 
         private void YTDownloader_DownloadConsoleLine(string line)
@@ -339,6 +343,11 @@ namespace YTArchivingGUI.Forms
             {
                 disableCheckEvent = false;
             }
+        }
+
+        private void buttonBrowseOutputPath_Click(object sender, EventArgs e)
+        {
+            // TODO
         }
     }
 }

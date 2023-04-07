@@ -39,8 +39,9 @@
             listBoxTitles = new ListBox();
             textBoxConsole = new TextBox();
             labelSkipped = new Label();
-            textBox1 = new TextBox();
+            textBoxOutputPath = new TextBox();
             label1 = new Label();
+            buttonBrowseOutputPath = new Button();
             SuspendLayout();
             // 
             // buttonNewFolder
@@ -145,29 +146,41 @@
             labelSkipped.TabIndex = 10;
             labelSkipped.Text = "x Skipped";
             // 
-            // textBox1
+            // textBoxOutputPath
             // 
-            textBox1.Location = new Point(68, 454);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(720, 23);
-            textBox1.TabIndex = 11;
+            textBoxOutputPath.Location = new Point(90, 454);
+            textBoxOutputPath.Name = "textBoxOutputPath";
+            textBoxOutputPath.Size = new Size(617, 23);
+            textBoxOutputPath.TabIndex = 11;
+            textBoxOutputPath.Text = "C:\\Output";
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(12, 457);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(72, 15);
             label1.TabIndex = 12;
-            label1.Text = "label1";
+            label1.Text = "Output Path";
+            // 
+            // buttonBrowseOutputPath
+            // 
+            buttonBrowseOutputPath.Location = new Point(713, 454);
+            buttonBrowseOutputPath.Name = "buttonBrowseOutputPath";
+            buttonBrowseOutputPath.Size = new Size(75, 23);
+            buttonBrowseOutputPath.TabIndex = 13;
+            buttonBrowseOutputPath.Text = "Browse";
+            buttonBrowseOutputPath.UseVisualStyleBackColor = true;
+            buttonBrowseOutputPath.Click += buttonBrowseOutputPath_Click;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 493);
+            Controls.Add(buttonBrowseOutputPath);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxOutputPath);
             Controls.Add(labelSkipped);
             Controls.Add(textBoxConsole);
             Controls.Add(listBoxTitles);
@@ -198,7 +211,8 @@
         private ListBox listBoxTitles;
         private TextBox textBoxConsole;
         private Label labelSkipped;
-        private TextBox textBox1;
+        private TextBox textBoxOutputPath;
         private Label label1;
+        private Button buttonBrowseOutputPath;
     }
 }

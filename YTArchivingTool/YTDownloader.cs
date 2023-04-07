@@ -51,9 +51,9 @@ namespace YTArchivingTool
         /// <param name="url">e.g. "https://www.youtube.com/channel/UC-WpvHaSBQEAztK6n_CupOg"</param>
         /// <param name="folderPath">e.g. @"MyFolder\Brandon Y Lee"</param>
         /// <returns></returns>
-        public async Task Download(string url, string folderPath)
+        public async Task Download(string url, string folderPath, string basePath)
         {
-            string arguments = @$"-S ""res:1080,fps"" -o ""{folderPath}/%(upload_date>%Y-%m-%d)s %(id)s %(title)s.%(ext)s"" --download-archive archive.txt ""{url}"" --write-auto-sub --write-thumbnail";
+            string arguments = @$"-S ""res:1080,fps"" -o ""{folderPath}/%(upload_date>%Y-%m-%d)s %(id)s %(title)s.%(ext)s"" --download-archive ""{basePath}/archive.txt"" ""{url}"" --write-auto-sub --write-thumbnail";
 
             ProcessStartInfo startInfo = new()
             {
