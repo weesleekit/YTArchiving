@@ -28,101 +28,131 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            treeView1 = new TreeView();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            buttonNewFolder = new Button();
+            buttonNewSub = new Button();
+            buttonDelete = new Button();
+            treeViewFoldersAndSubs = new TreeView();
+            buttonSyncAll = new Button();
+            buttonSyncSelected = new Button();
+            buttonLoadPreset = new Button();
+            progressBarDownload = new ProgressBar();
+            listBoTitles = new ListBox();
             SuspendLayout();
             // 
-            // button1
+            // buttonNewFolder
             // 
-            button1.Location = new Point(12, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "New Folder";
-            button1.UseVisualStyleBackColor = true;
+            buttonNewFolder.Location = new Point(12, 12);
+            buttonNewFolder.Name = "buttonNewFolder";
+            buttonNewFolder.Size = new Size(75, 23);
+            buttonNewFolder.TabIndex = 0;
+            buttonNewFolder.Text = "New Folder";
+            buttonNewFolder.UseVisualStyleBackColor = true;
+            buttonNewFolder.Click += ButtonNewFolder_Click;
             // 
-            // button2
+            // buttonNewSub
             // 
-            button2.Location = new Point(93, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 1;
-            button2.Text = "New Sub";
-            button2.UseVisualStyleBackColor = true;
+            buttonNewSub.Location = new Point(93, 12);
+            buttonNewSub.Name = "buttonNewSub";
+            buttonNewSub.Size = new Size(75, 23);
+            buttonNewSub.TabIndex = 1;
+            buttonNewSub.Text = "New Sub";
+            buttonNewSub.UseVisualStyleBackColor = true;
+            buttonNewSub.Click += ButtonNewSub_Click;
             // 
-            // button3
+            // buttonDelete
             // 
-            button3.Location = new Point(174, 12);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Delete";
-            button3.UseVisualStyleBackColor = true;
+            buttonDelete.Location = new Point(174, 12);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(75, 23);
+            buttonDelete.TabIndex = 2;
+            buttonDelete.Text = "Delete";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += ButtonDelete_Click;
             // 
-            // treeView1
+            // treeViewFoldersAndSubs
             // 
-            treeView1.Location = new Point(12, 41);
-            treeView1.Name = "treeView1";
-            treeView1.Size = new Size(237, 368);
-            treeView1.TabIndex = 3;
+            treeViewFoldersAndSubs.CheckBoxes = true;
+            treeViewFoldersAndSubs.Location = new Point(12, 41);
+            treeViewFoldersAndSubs.Name = "treeViewFoldersAndSubs";
+            treeViewFoldersAndSubs.Size = new Size(237, 368);
+            treeViewFoldersAndSubs.TabIndex = 3;
+            treeViewFoldersAndSubs.AfterCheck += TreeViewFoldersAndSubs_AfterCheck;
             // 
-            // button4
+            // buttonSyncAll
             // 
-            button4.Location = new Point(12, 415);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 4;
-            button4.Text = "Sync all";
-            button4.UseVisualStyleBackColor = true;
+            buttonSyncAll.Location = new Point(12, 415);
+            buttonSyncAll.Name = "buttonSyncAll";
+            buttonSyncAll.Size = new Size(75, 23);
+            buttonSyncAll.TabIndex = 4;
+            buttonSyncAll.Text = "Sync all";
+            buttonSyncAll.UseVisualStyleBackColor = true;
+            buttonSyncAll.Click += ButtonSyncAll_Click;
             // 
-            // button5
+            // buttonSyncSelected
             // 
-            button5.Location = new Point(93, 415);
-            button5.Name = "button5";
-            button5.Size = new Size(75, 23);
-            button5.TabIndex = 5;
-            button5.Text = "Sync one";
-            button5.UseVisualStyleBackColor = true;
+            buttonSyncSelected.Location = new Point(93, 415);
+            buttonSyncSelected.Name = "buttonSyncSelected";
+            buttonSyncSelected.Size = new Size(75, 23);
+            buttonSyncSelected.TabIndex = 5;
+            buttonSyncSelected.Text = "Sync one";
+            buttonSyncSelected.UseVisualStyleBackColor = true;
+            buttonSyncSelected.Click += ButtonSyncSelected_Click;
             // 
-            // button6
+            // buttonLoadPreset
             // 
-            button6.Location = new Point(174, 415);
-            button6.Name = "button6";
-            button6.Size = new Size(75, 23);
-            button6.TabIndex = 6;
-            button6.Text = "LoadPreset";
-            button6.UseVisualStyleBackColor = true;
+            buttonLoadPreset.Location = new Point(174, 415);
+            buttonLoadPreset.Name = "buttonLoadPreset";
+            buttonLoadPreset.Size = new Size(75, 23);
+            buttonLoadPreset.TabIndex = 6;
+            buttonLoadPreset.Text = "LoadPreset";
+            buttonLoadPreset.UseVisualStyleBackColor = true;
+            buttonLoadPreset.Click += ButtonLoadPreset_Click;
+            // 
+            // progressBarDownload
+            // 
+            progressBarDownload.Location = new Point(303, 41);
+            progressBarDownload.Name = "progressBarDownload";
+            progressBarDownload.Size = new Size(364, 23);
+            progressBarDownload.TabIndex = 7;
+            // 
+            // listBoTitles
+            // 
+            listBoTitles.FormattingEnabled = true;
+            listBoTitles.ItemHeight = 15;
+            listBoTitles.Location = new Point(303, 70);
+            listBoTitles.Name = "listBoTitles";
+            listBoTitles.Size = new Size(364, 304);
+            listBoTitles.TabIndex = 8;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button6);
-            Controls.Add(button5);
-            Controls.Add(button4);
-            Controls.Add(treeView1);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(listBoTitles);
+            Controls.Add(progressBarDownload);
+            Controls.Add(buttonLoadPreset);
+            Controls.Add(buttonSyncSelected);
+            Controls.Add(buttonSyncAll);
+            Controls.Add(treeViewFoldersAndSubs);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonNewSub);
+            Controls.Add(buttonNewFolder);
             Name = "Main";
-            Text = "Form1";
+            Text = "YT Archiving";
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private TreeView treeView1;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private Button buttonNewFolder;
+        private Button buttonNewSub;
+        private Button buttonDelete;
+        private TreeView treeViewFoldersAndSubs;
+        private Button buttonSyncAll;
+        private Button buttonSyncSelected;
+        private Button buttonLoadPreset;
+        private ProgressBar progressBarDownload;
+        private ListBox listBoTitles;
     }
 }

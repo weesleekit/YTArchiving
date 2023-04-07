@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\YTArchivingTool\YTArchivingTool.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="ExternalBinaries\ffmpeg.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

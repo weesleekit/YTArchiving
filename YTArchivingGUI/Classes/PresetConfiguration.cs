@@ -1,10 +1,10 @@
-﻿using YTArchivingConsole.Models;
+﻿using YTArchivingGUI.Models;
 
-namespace YTArchivingConsole.Classes
+namespace YTArchivingGUI.Classes
 {
-    internal class DefaultConfiguration
+    internal static class PresetConfiguration
     {
-        internal static List<SubFolder> DefaultFolders = new()
+        internal static List<SubFolder> Configuration = new()
         {
             new SubFolder() { Name = "Music",
                 Subscriptions = new()

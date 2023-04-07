@@ -1,4 +1,4 @@
-﻿namespace YTArchivingConsole.Models
+﻿namespace YTArchivingGUI.Models
 {
     internal class Subscription
     {
