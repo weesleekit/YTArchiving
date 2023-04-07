@@ -1,6 +1,6 @@
-﻿using YTArchiving.Models;
+﻿using YTArchivingConsole.Models;
 
-namespace YTArchiving.Classes
+namespace YTArchivingConsole.Classes
 {
     internal class DefaultConfiguration
     {
@@ -301,7 +301,7 @@ namespace YTArchiving.Classes
                     URL = "https://www.youtube.com/channel/UCbCq5Y0WPGimG2jNXhoQxGw",
                     Name = "Atomic Frontier",
                     Description = "Similar to Tom Scott"
-                    }
+                    },
                     new Subscription{
                     URL = "https://www.youtube.com/channel/UC2LVhJH_9cT2XKp0VAfsKOQ",
                     Name = "The Tim Traveller"

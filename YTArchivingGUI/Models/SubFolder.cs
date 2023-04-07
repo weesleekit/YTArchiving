@@ -1,4 +1,4 @@
-﻿namespace YTArchiving.Models
+﻿namespace YTArchivingConsole.Models
 {
     internal class SubFolder
     {

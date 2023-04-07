@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using YTArchiving.Models;
+using YTArchivingConsole.Models;
 
-namespace YTArchiving.Classes
+namespace YTArchivingConsole.Classes
 {
     internal static class LoadSaveManager
     {

@@ -361,5 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/YTArchiving/ExternalBinaries/ffmpeg.exe
-/YTArchiving/ExternalBinaries/yt-dlp.exe
+/YTArchivingGUI/ExternalBinaries/yt-dlp.exe
+/YTArchivingGUI/ExternalBinaries/ffmpeg.exe
+/YTArchivingConsole/ExternalBinaries/yt-dlp.exe
+/YTArchivingConsole/ExternalBinaries/ffmpeg.exe
