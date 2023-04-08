@@ -30,7 +30,7 @@ namespace YTArchivingGUI.Forms
         internal async Task StartDownloads(Dictionary<Subscription, SubFolder> toDownload)
         {
             skipCount = 0;
-            downloadCount = -1;
+            downloadCount = 0;
 
             listBoxTitles.Items.Clear();
 
@@ -38,6 +38,8 @@ namespace YTArchivingGUI.Forms
             {
                 await StartDownload(item.Key, item.Value);
             }
+
+            listBoxTitles.Items.Add("Finished");
         }
 
         private async Task StartDownload(Subscription subscription, SubFolder subFolder)
@@ -57,6 +59,8 @@ namespace YTArchivingGUI.Forms
             yTDownloader.DownloadSkippedEvent += YTDownloader_DownloadSkippedEvent;
 
             await yTDownloader.Download(subscription.URL, fullPath, basePath);
+
+            progressBarDownload.Value = 100;
         }
 
         private void YTDownloader_DownloadConsoleLine(string line)
@@ -110,10 +114,6 @@ namespace YTArchivingGUI.Forms
         {
             Invoke(() =>
             {
-                progressBarDownload.Value = 100;
-                listBoxTitles.Items.Add("Finished");
-
-                downloadCount++;
                 UpdateCounterLabel();
             });
         }
