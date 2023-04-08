@@ -72,6 +72,8 @@ namespace YTArchivingTool
             string percentageString = match.Groups[1].Value;
             double percentage = double.Parse(percentageString);
 
+            percentage = Math.Clamp(percentage, 0, 100);
+
             return percentage;
         }
 
