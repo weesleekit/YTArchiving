@@ -35,10 +35,6 @@
             buttonSyncAll = new Button();
             buttonSyncSelected = new Button();
             buttonLoadPreset = new Button();
-            progressBarDownload = new ProgressBar();
-            listBoxTitles = new ListBox();
-            textBoxConsole = new TextBox();
-            labelSkipped = new Label();
             textBoxOutputPath = new TextBox();
             label1 = new Label();
             buttonBrowseOutputPath = new Button();
@@ -76,16 +72,18 @@
             // 
             // treeViewFoldersAndSubs
             // 
+            treeViewFoldersAndSubs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             treeViewFoldersAndSubs.CheckBoxes = true;
             treeViewFoldersAndSubs.Location = new Point(12, 41);
             treeViewFoldersAndSubs.Name = "treeViewFoldersAndSubs";
-            treeViewFoldersAndSubs.Size = new Size(237, 368);
+            treeViewFoldersAndSubs.Size = new Size(493, 469);
             treeViewFoldersAndSubs.TabIndex = 3;
             treeViewFoldersAndSubs.AfterCheck += TreeViewFoldersAndSubs_AfterCheck;
             // 
             // buttonSyncAll
             // 
-            buttonSyncAll.Location = new Point(12, 415);
+            buttonSyncAll.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonSyncAll.Location = new Point(12, 516);
             buttonSyncAll.Name = "buttonSyncAll";
             buttonSyncAll.Size = new Size(75, 23);
             buttonSyncAll.TabIndex = 4;
@@ -95,7 +93,8 @@
             // 
             // buttonSyncSelected
             // 
-            buttonSyncSelected.Location = new Point(93, 415);
+            buttonSyncSelected.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonSyncSelected.Location = new Point(93, 516);
             buttonSyncSelected.Name = "buttonSyncSelected";
             buttonSyncSelected.Size = new Size(75, 23);
             buttonSyncSelected.TabIndex = 5;
@@ -105,7 +104,8 @@
             // 
             // buttonLoadPreset
             // 
-            buttonLoadPreset.Location = new Point(174, 415);
+            buttonLoadPreset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonLoadPreset.Location = new Point(174, 516);
             buttonLoadPreset.Name = "buttonLoadPreset";
             buttonLoadPreset.Size = new Size(75, 23);
             buttonLoadPreset.TabIndex = 6;
@@ -113,51 +113,20 @@
             buttonLoadPreset.UseVisualStyleBackColor = true;
             buttonLoadPreset.Click += ButtonLoadPreset_Click;
             // 
-            // progressBarDownload
-            // 
-            progressBarDownload.Location = new Point(297, 54);
-            progressBarDownload.Name = "progressBarDownload";
-            progressBarDownload.Size = new Size(491, 23);
-            progressBarDownload.TabIndex = 7;
-            // 
-            // listBoxTitles
-            // 
-            listBoxTitles.FormattingEnabled = true;
-            listBoxTitles.ItemHeight = 15;
-            listBoxTitles.Location = new Point(297, 83);
-            listBoxTitles.Name = "listBoxTitles";
-            listBoxTitles.Size = new Size(491, 154);
-            listBoxTitles.TabIndex = 8;
-            // 
-            // textBoxConsole
-            // 
-            textBoxConsole.Location = new Point(297, 243);
-            textBoxConsole.Multiline = true;
-            textBoxConsole.Name = "textBoxConsole";
-            textBoxConsole.Size = new Size(491, 195);
-            textBoxConsole.TabIndex = 9;
-            // 
-            // labelSkipped
-            // 
-            labelSkipped.AutoSize = true;
-            labelSkipped.Location = new Point(297, 20);
-            labelSkipped.Name = "labelSkipped";
-            labelSkipped.Size = new Size(58, 15);
-            labelSkipped.TabIndex = 10;
-            labelSkipped.Text = "x Skipped";
-            // 
             // textBoxOutputPath
             // 
-            textBoxOutputPath.Location = new Point(90, 454);
+            textBoxOutputPath.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxOutputPath.Location = new Point(90, 555);
             textBoxOutputPath.Name = "textBoxOutputPath";
-            textBoxOutputPath.Size = new Size(617, 23);
+            textBoxOutputPath.Size = new Size(334, 23);
             textBoxOutputPath.TabIndex = 11;
             textBoxOutputPath.Text = "C:\\Output";
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new Point(12, 457);
+            label1.Location = new Point(12, 558);
             label1.Name = "label1";
             label1.Size = new Size(72, 15);
             label1.TabIndex = 12;
@@ -165,7 +134,8 @@
             // 
             // buttonBrowseOutputPath
             // 
-            buttonBrowseOutputPath.Location = new Point(713, 454);
+            buttonBrowseOutputPath.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonBrowseOutputPath.Location = new Point(430, 555);
             buttonBrowseOutputPath.Name = "buttonBrowseOutputPath";
             buttonBrowseOutputPath.Size = new Size(75, 23);
             buttonBrowseOutputPath.TabIndex = 13;
@@ -177,14 +147,10 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 493);
+            ClientSize = new Size(517, 594);
             Controls.Add(buttonBrowseOutputPath);
             Controls.Add(label1);
             Controls.Add(textBoxOutputPath);
-            Controls.Add(labelSkipped);
-            Controls.Add(textBoxConsole);
-            Controls.Add(listBoxTitles);
-            Controls.Add(progressBarDownload);
             Controls.Add(buttonLoadPreset);
             Controls.Add(buttonSyncSelected);
             Controls.Add(buttonSyncAll);
@@ -207,10 +173,6 @@
         private Button buttonSyncAll;
         private Button buttonSyncSelected;
         private Button buttonLoadPreset;
-        private ProgressBar progressBarDownload;
-        private ListBox listBoxTitles;
-        private TextBox textBoxConsole;
-        private Label labelSkipped;
         private TextBox textBoxOutputPath;
         private Label label1;
         private Button buttonBrowseOutputPath;

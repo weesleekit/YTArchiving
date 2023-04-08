@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Xml.Linq;
 using YTArchivingGUI.Classes;
 using YTArchivingGUI.Models;
 using YTArchivingTool;
@@ -9,18 +6,11 @@ namespace YTArchivingGUI.Forms
 {
     public partial class Main : Form
     {
-        // Constants
-
-        private const string binariesPath = @"ExternalBinaries\yt-dlp.exe";
-
         // Fields
 
         private List<SubFolder> configuration = new();
 
         private bool disableCheckEvent = false;
-
-        int skipCount = 0;
-        int downloadCount = 0;
 
         // Constructor
 
@@ -108,85 +98,18 @@ namespace YTArchivingGUI.Forms
             }
         }
 
-        private async Task StartDownload(Subscription subscription, SubFolder subFolder)
+        private async Task StartDownload(Dictionary<Subscription, SubFolder> toDownload)
         {
-            // TODO:Disable interface, enable cancel button
-
             string basePath = textBoxOutputPath.Text;
 
-            string localPath = $@"{subFolder.Name}\{subscription.Name}";
+            Downloader downloader = new(basePath);
 
-            string fullPath = Path.Join(basePath, localPath);
-
-            YTDownloader yTDownloader = new(binariesPath);
-
-            yTDownloader.DownloadFinishedEvent += DownloadFinishedEvent;
-            yTDownloader.DownloadProgressEvent += YTDownloader_DownloadProgressEvent;
-            yTDownloader.DownloadTitleEvent += YTDownloader_DownloadTitleEvent;
-            yTDownloader.DownloadConsoleLine += YTDownloader_DownloadConsoleLine;
-            yTDownloader.DownloadSkippedEvent += YTDownloader_DownloadSkippedEvent;
-            skipCount = 0;
-            downloadCount = 0;
-
-            listBoxTitles.Items.Clear();
-
-            await yTDownloader.Download(subscription.URL, fullPath, basePath);
+            Hide();
+            downloader.Show(this);
+            await downloader.StartDownloads(toDownload);
+            Show();
         }
 
-        private void YTDownloader_DownloadConsoleLine(string line)
-        {
-            Invoke(() =>
-            {
-                if (textBoxConsole.Text.Length == 0)
-                {
-                    textBoxConsole.Text += $"{line}";
-                }
-                else
-                {
-                    textBoxConsole.Text += $"{Environment.NewLine}{line}";
-                }
-            });
-        }
-
-        private void YTDownloader_DownloadTitleEvent(string titleName)
-        {
-            Invoke(() =>
-            {
-                listBoxTitles.Items.Add(titleName);
-                UpdateCounterLabel();
-            });
-        }
-
-        private void YTDownloader_DownloadProgressEvent(double progress)
-        {
-            Invoke(() =>
-            {
-                progressBarDownload.Value = (int)(progress);
-            });
-        }
-
-        private void DownloadFinishedEvent()
-        {
-            Invoke(() =>
-            {
-                progressBarDownload.Value = 100;
-                listBoxTitles.Items.Add("Finished");
-            });
-        }
-
-        private void YTDownloader_DownloadSkippedEvent()
-        {
-            Invoke(() =>
-            {
-                skipCount++;
-                UpdateCounterLabel();
-            });
-        }
-
-        private void UpdateCounterLabel()
-        {
-            labelSkipped.Text = $"{skipCount} skipped, {downloadCount} downloaded";
-        }
 
         // UI Events
 
@@ -262,6 +185,8 @@ namespace YTArchivingGUI.Forms
 
         private async void ButtonSyncAll_Click(object sender, EventArgs e)
         {
+            Dictionary<Subscription, SubFolder> toDownload = new();
+
             foreach (var subFolder in configuration)
             {
                 foreach (var subscription in subFolder.Subscriptions)
@@ -271,9 +196,11 @@ namespace YTArchivingGUI.Forms
                         continue;
                     }
 
-                    await StartDownload(subscription, subFolder);
+                    toDownload.Add(subscription, subFolder);
                 }
             }
+
+            await StartDownload(toDownload);
         }
 
         private async void ButtonSyncSelected_Click(object sender, EventArgs e)
@@ -302,8 +229,11 @@ namespace YTArchivingGUI.Forms
                 }
 
                 SubFolder subParent = (SubFolder)node.Parent.Tag;
-
-                await StartDownload(subscription, subParent);
+                Dictionary<Subscription, SubFolder> toDownload = new()
+                {
+                    { subscription, subParent }
+                };
+                await StartDownload(toDownload);
             }
             else
             {
@@ -320,7 +250,11 @@ namespace YTArchivingGUI.Forms
                 return;
             }
 
-            configuration = PresetConfiguration.Configuration;
+            configuration = PresetConfiguration.Configuration.OrderBy(x => x.Name).ToList();
+            foreach (var subfolder in configuration)
+            {
+                subfolder.Subscriptions = subfolder.Subscriptions.OrderBy(x => x.Name).ToList();
+            }
             LoadSaveManager.Save(configuration);
             UpdateTree();
         }
