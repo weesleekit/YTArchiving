@@ -1,6 +1,5 @@
 using YTArchivingGUI.Classes;
 using YTArchivingGUI.Models;
-using YTArchivingTool;
 
 namespace YTArchivingGUI.Forms
 {
@@ -8,7 +7,7 @@ namespace YTArchivingGUI.Forms
     {
         // Fields
 
-        private List<SubFolder> configuration = new();
+        private readonly SaveModel configuration = new();
 
         private bool disableCheckEvent = false;
 
@@ -20,6 +19,8 @@ namespace YTArchivingGUI.Forms
 
             configuration = LoadSaveManager.Load();
 
+            textBoxOutputPath.Text = configuration.BasePath;
+
             UpdateTree();
         }
 
@@ -28,13 +29,13 @@ namespace YTArchivingGUI.Forms
 
         internal void NewFolder(string name)
         {
-            SubFolder subFolder = new SubFolder()
+            SubFolder subFolder = new()
             {
                 Name = name
             };
 
-            configuration.Add(subFolder);
-            configuration = configuration.OrderBy(x => x.Name).ToList();
+            configuration.SubFolders.Add(subFolder);
+            configuration.SubFolders = configuration.SubFolders.OrderBy(x => x.Name).ToList();
 
             LoadSaveManager.Save(configuration);
             UpdateTree();
@@ -42,7 +43,7 @@ namespace YTArchivingGUI.Forms
 
         internal void NewSubscription(string name, string url, SubFolder subFolder)
         {
-            Subscription subscription = new Subscription()
+            Subscription subscription = new()
             {
                 Name = name,
                 URL = url,
@@ -65,7 +66,7 @@ namespace YTArchivingGUI.Forms
             {
                 treeViewFoldersAndSubs.Nodes.Clear();
 
-                foreach (var folder in configuration)
+                foreach (var folder in  configuration.SubFolders)
                 {
                     var newFolderNode = treeViewFoldersAndSubs.Nodes.Add(folder.Name);
                     newFolderNode.Tag = folder;
@@ -83,7 +84,7 @@ namespace YTArchivingGUI.Forms
                     }
                 }
 
-                if (!configuration.Any())
+                if (!configuration.SubFolders.Any())
                 {
                     return;
                 }
@@ -159,7 +160,7 @@ namespace YTArchivingGUI.Forms
                     return;
                 }
 
-                configuration.Remove(subFolder);
+                configuration.SubFolders.Remove(subFolder);
             }
             else if (node.Tag is Subscription subscription)
             {
@@ -187,7 +188,7 @@ namespace YTArchivingGUI.Forms
         {
             Dictionary<Subscription, SubFolder> toDownload = new();
 
-            foreach (var subFolder in configuration)
+            foreach (var subFolder in configuration.SubFolders)
             {
                 foreach (var subscription in subFolder.Subscriptions)
                 {
@@ -250,8 +251,8 @@ namespace YTArchivingGUI.Forms
                 return;
             }
 
-            configuration = PresetConfiguration.Configuration.OrderBy(x => x.Name).ToList();
-            foreach (var subfolder in configuration)
+            configuration.SubFolders = PresetConfiguration.Configuration.OrderBy(x => x.Name).ToList();
+            foreach (var subfolder in configuration.SubFolders)
             {
                 subfolder.Subscriptions = subfolder.Subscriptions.OrderBy(x => x.Name).ToList();
             }
@@ -275,7 +276,7 @@ namespace YTArchivingGUI.Forms
                     return;
                 }
 
-                if (e.Node.Tag is SubFolder subFolder)
+                if (e.Node.Tag is SubFolder)
                 {
                     e.Node.Checked = false;
                     return;
@@ -297,9 +298,25 @@ namespace YTArchivingGUI.Forms
             }
         }
 
-        private void buttonBrowseOutputPath_Click(object sender, EventArgs e)
+        private void ButtonBrowseOutputPath_Click(object sender, EventArgs e)
         {
-            // TODO
+            using var folderBrowserDialog = new FolderBrowserDialog();
+
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedPath = folderBrowserDialog.SelectedPath;
+                textBoxOutputPath.Text = selectedPath;
+                LoadSaveManager.Save(configuration);
+            }
+        }
+
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (textBoxOutputPath.Text != configuration.BasePath)
+            {
+                configuration.BasePath = textBoxOutputPath.Text;
+                LoadSaveManager.Save(configuration);
+            }
         }
     }
 }

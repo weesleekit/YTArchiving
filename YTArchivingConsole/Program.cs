@@ -12,7 +12,7 @@ namespace YTArchivingConsole
 
             YTDownloader yTDownloader = new(binariesPath);
 
-            await yTDownloader.Download(url, path);
+            await yTDownloader.Download(url, path, basePath: string.Empty);
         }
     }
 }

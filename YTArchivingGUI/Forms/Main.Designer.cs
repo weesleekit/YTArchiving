@@ -141,7 +141,7 @@
             buttonBrowseOutputPath.TabIndex = 13;
             buttonBrowseOutputPath.Text = "Browse";
             buttonBrowseOutputPath.UseVisualStyleBackColor = true;
-            buttonBrowseOutputPath.Click += buttonBrowseOutputPath_Click;
+            buttonBrowseOutputPath.Click += ButtonBrowseOutputPath_Click;
             // 
             // Main
             // 
@@ -160,6 +160,7 @@
             Controls.Add(buttonNewFolder);
             Name = "Main";
             Text = "YT Archiving";
+            FormClosing += Main_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }

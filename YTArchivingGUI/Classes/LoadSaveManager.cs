@@ -12,7 +12,7 @@ namespace YTArchivingGUI.Classes
 
         // Internal Methods
 
-        internal static List<SubFolder> Load()
+        internal static SaveModel Load()
         {
             string path = GetPath();
 
@@ -23,16 +23,16 @@ namespace YTArchivingGUI.Classes
 
             string fileContents = File.ReadAllText(path);
 
-            var deserialisedObject = JsonConvert.DeserializeObject<List<SubFolder>>(fileContents);
+            var deserialisedObject = JsonConvert.DeserializeObject<SaveModel>(fileContents);
 
             return deserialisedObject ?? throw new Exception($"Unable to deserialise {path}");
         }
 
-        internal static void Save(List<SubFolder> listToSave)
+        internal static void Save(SaveModel saveModel)
         {
             string path = GetPath();
 
-            string fileContents = JsonConvert.SerializeObject(listToSave);
+            string fileContents = JsonConvert.SerializeObject(saveModel);
 
             FileInfo fileInfo = new(path);
             fileInfo.Directory?.Create();
