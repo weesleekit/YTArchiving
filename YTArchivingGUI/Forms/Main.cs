@@ -19,6 +19,9 @@ namespace YTArchivingGUI.Forms
 
         private bool disableCheckEvent = false;
 
+        int skipCount = 0;
+        int downloadCount = 0;
+
         // Constructor
 
         public Main()
@@ -122,7 +125,8 @@ namespace YTArchivingGUI.Forms
             yTDownloader.DownloadTitleEvent += YTDownloader_DownloadTitleEvent;
             yTDownloader.DownloadConsoleLine += YTDownloader_DownloadConsoleLine;
             yTDownloader.DownloadSkippedEvent += YTDownloader_DownloadSkippedEvent;
-            skipped = 0;
+            skipCount = 0;
+            downloadCount = 0;
 
             listBoxTitles.Items.Clear();
 
@@ -149,6 +153,7 @@ namespace YTArchivingGUI.Forms
             Invoke(() =>
             {
                 listBoxTitles.Items.Add(titleName);
+                UpdateCounterLabel();
             });
         }
 
@@ -169,15 +174,18 @@ namespace YTArchivingGUI.Forms
             });
         }
 
-        int skipped = 0;
-
         private void YTDownloader_DownloadSkippedEvent()
         {
             Invoke(() =>
             {
-                skipped++;
-                labelSkipped.Text = $"{skipped} skipped";
+                skipCount++;
+                UpdateCounterLabel();
             });
+        }
+
+        private void UpdateCounterLabel()
+        {
+            labelSkipped.Text = $"{skipCount} skipped, {downloadCount} downloaded";
         }
 
         // UI Events

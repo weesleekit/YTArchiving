@@ -15,7 +15,7 @@ namespace YTArchivingTool
 
         private const string alreadyDownloadedMessage = " has already been recorded in the archive";
 
-        private const string extension = ".f248.webm";
+        private const string extension = ".en.vtt";
 
         private const string downloadProgressFragment = "% of ~";
 
