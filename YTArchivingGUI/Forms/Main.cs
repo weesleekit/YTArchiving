@@ -68,31 +68,41 @@ namespace YTArchivingGUI.Forms
         {
             disableCheckEvent = true;
 
-            treeViewFoldersAndSubs.Nodes.Clear();
-
-            foreach (var folder in configuration)
+            try
             {
-                var newFolderNode = treeViewFoldersAndSubs.Nodes.Add(folder.Name);
-                newFolderNode.Tag = folder;
+                treeViewFoldersAndSubs.Nodes.Clear();
 
-                if (folder.Subscriptions == null)
+                foreach (var folder in configuration)
                 {
-                    continue;
+                    var newFolderNode = treeViewFoldersAndSubs.Nodes.Add(folder.Name);
+                    newFolderNode.Tag = folder;
+
+                    if (folder.Subscriptions == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (var subscription in folder.Subscriptions)
+                    {
+                        var newSubscriptionNode = newFolderNode.Nodes.Add(subscription.Name);
+                        newSubscriptionNode.Tag = subscription;
+                        newSubscriptionNode.Checked = subscription.Active;
+                    }
                 }
 
-                foreach (var subscription in folder.Subscriptions)
+                if (!configuration.Any())
                 {
-                    var newSubscriptionNode = newFolderNode.Nodes.Add(subscription.Name);
-                    newSubscriptionNode.Tag = subscription;
-                    newSubscriptionNode.Checked = subscription.Active;
+                    return;
                 }
+
+                treeViewFoldersAndSubs.ExpandAll();
+
+                treeViewFoldersAndSubs.Nodes[0].EnsureVisible();
             }
-
-            treeViewFoldersAndSubs.ExpandAll();
-
-            treeViewFoldersAndSubs.Nodes[0].EnsureVisible();
-
-            disableCheckEvent = false;
+            finally
+            {
+                disableCheckEvent = false;
+            }
         }
 
         private async Task StartDownload(Subscription subscription, SubFolder subFolder)
