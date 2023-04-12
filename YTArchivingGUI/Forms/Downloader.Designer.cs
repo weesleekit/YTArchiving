@@ -30,9 +30,9 @@
         {
             labelSkipped = new Label();
             textBoxConsole = new TextBox();
-            listBoxTitles = new ListBox();
             progressBarDownload = new ProgressBar();
             splitContainer1 = new SplitContainer();
+            textBoxTitles = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -55,18 +55,8 @@
             textBoxConsole.Multiline = true;
             textBoxConsole.Name = "textBoxConsole";
             textBoxConsole.ScrollBars = ScrollBars.Vertical;
-            textBoxConsole.Size = new Size(394, 416);
+            textBoxConsole.Size = new Size(549, 469);
             textBoxConsole.TabIndex = 13;
-            // 
-            // listBoxTitles
-            // 
-            listBoxTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            listBoxTitles.FormattingEnabled = true;
-            listBoxTitles.ItemHeight = 15;
-            listBoxTitles.Location = new Point(3, 53);
-            listBoxTitles.Name = "listBoxTitles";
-            listBoxTitles.Size = new Size(368, 349);
-            listBoxTitles.TabIndex = 12;
             // 
             // progressBarDownload
             // 
@@ -78,29 +68,39 @@
             // 
             // splitContainer1
             // 
-            splitContainer1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            splitContainer1.Dock = DockStyle.Fill;
             splitContainer1.FixedPanel = FixedPanel.Panel1;
-            splitContainer1.Location = new Point(12, 12);
+            splitContainer1.Location = new Point(0, 0);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(textBoxTitles);
             splitContainer1.Panel1.Controls.Add(progressBarDownload);
             splitContainer1.Panel1.Controls.Add(labelSkipped);
-            splitContainer1.Panel1.Controls.Add(listBoxTitles);
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(textBoxConsole);
-            splitContainer1.Size = new Size(772, 416);
+            splitContainer1.Size = new Size(927, 469);
             splitContainer1.SplitterDistance = 374;
             splitContainer1.TabIndex = 15;
+            // 
+            // textBoxTitles
+            // 
+            textBoxTitles.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxTitles.Location = new Point(3, 53);
+            textBoxTitles.Multiline = true;
+            textBoxTitles.Name = "textBoxTitles";
+            textBoxTitles.ScrollBars = ScrollBars.Vertical;
+            textBoxTitles.Size = new Size(368, 413);
+            textBoxTitles.TabIndex = 15;
             // 
             // Downloader
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(796, 469);
+            ClientSize = new Size(927, 469);
             Controls.Add(splitContainer1);
             Name = "Downloader";
             Text = "Downloader";
@@ -117,8 +117,8 @@
 
         private Label labelSkipped;
         private TextBox textBoxConsole;
-        private ListBox listBoxTitles;
         private ProgressBar progressBarDownload;
         private SplitContainer splitContainer1;
+        private TextBox textBoxTitles;
     }
 }
