@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Downloader));
             labelSkipped = new Label();
             textBoxConsole = new TextBox();
             progressBarDownload = new ProgressBar();
@@ -102,6 +103,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(927, 469);
             Controls.Add(splitContainer1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Downloader";
             Text = "Downloader";
             splitContainer1.Panel1.ResumeLayout(false);

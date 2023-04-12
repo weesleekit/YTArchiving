@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewFolder));
             textBoxFolderName = new TextBox();
             label1 = new Label();
             SuspendLayout();
@@ -57,6 +58,7 @@
             ClientSize = new Size(285, 45);
             Controls.Add(label1);
             Controls.Add(textBoxFolderName);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "NewFolder";
             StartPosition = FormStartPosition.CenterParent;
             Text = "NewFolder";

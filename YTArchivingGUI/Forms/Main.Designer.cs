@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             buttonNewFolder = new Button();
             buttonNewSub = new Button();
             buttonDelete = new Button();
@@ -158,6 +159,7 @@
             Controls.Add(buttonDelete);
             Controls.Add(buttonNewSub);
             Controls.Add(buttonNewFolder);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             Text = "YT Archiving";
             FormClosing += Main_FormClosing;
