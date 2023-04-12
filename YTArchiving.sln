@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTArchivingGUI", "YTArchivingGUI\YTArchivingGUI.csproj", "{46F3F990-82CF-460A-B756-35D9E1456BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YTArchivingTool", "YTArchivingTool\YTArchivingTool.csproj", "{22E5528B-108A-44B9-A0CC-441845BA83CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTArchivingTool", "YTArchivingTool\YTArchivingTool.csproj", "{22E5528B-108A-44B9-A0CC-441845BA83CE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTArchivingConsole", "YTArchivingConsole\YTArchivingConsole.csproj", "{2C27AA8D-ECF8-4993-9157-3B6D9FB399B9}"
 EndProject

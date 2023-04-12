@@ -66,7 +66,7 @@ namespace YTArchivingGUI.Forms
             {
                 treeViewFoldersAndSubs.Nodes.Clear();
 
-                foreach (var folder in  configuration.SubFolders)
+                foreach (var folder in configuration.SubFolders)
                 {
                     var newFolderNode = treeViewFoldersAndSubs.Nodes.Add(folder.Name);
                     newFolderNode.Tag = folder;

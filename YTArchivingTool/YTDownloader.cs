@@ -8,7 +8,7 @@ namespace YTArchivingTool
 
         public delegate void DownloadConsoleLineEventHandler(string titleName);
 
-        public delegate void DownloadTitleEventHandler(string titleName);
+        public delegate void DownloadTitleEventHandler(string titleNameIncludingDate);
 
         public delegate void DownloadProgressEventHandler(double progress);
 

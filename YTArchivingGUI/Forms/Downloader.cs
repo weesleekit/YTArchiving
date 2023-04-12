@@ -32,14 +32,14 @@ namespace YTArchivingGUI.Forms
             skipCount = 0;
             downloadCount = 0;
 
-            listBoxTitles.Items.Clear();
+            textBoxTitles.Text = string.Empty;
 
             foreach (var item in toDownload)
             {
                 await StartDownload(item.Key, item.Value);
             }
 
-            listBoxTitles.Items.Add("Finished");
+            textBoxTitles.Text += $"{Environment.NewLine}Finished";
         }
 
         private async Task StartDownload(Subscription subscription, SubFolder subFolder)
@@ -91,11 +91,13 @@ namespace YTArchivingGUI.Forms
         }
 
 
-        private void YTDownloader_DownloadTitleEvent(string titleName)
+        private void YTDownloader_DownloadTitleEvent(string titleNameIncludingDate)
         {
             Invoke(() =>
             {
-                listBoxTitles.Items.Add(titleName);
+                textBoxTitles.Text += $"{Environment.NewLine}{titleNameIncludingDate}";
+                textBoxTitles.SelectionStart = textBoxTitles.TextLength;
+                textBoxTitles.ScrollToCaret();
 
                 downloadCount++;
                 UpdateCounterLabel();

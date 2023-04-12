@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewSubscription));
             label1 = new Label();
             textBoxFolderName = new TextBox();
             label2 = new Label();
@@ -79,6 +80,7 @@
             Controls.Add(textBoxURL);
             Controls.Add(label1);
             Controls.Add(textBoxFolderName);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "NewSubscription";
             StartPosition = FormStartPosition.CenterParent;
             Text = "NewSubscription";
