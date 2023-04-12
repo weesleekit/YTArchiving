@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTArchivingTool", "YTArchiv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YTArchivingConsole", "YTArchivingConsole\YTArchivingConsole.csproj", "{2C27AA8D-ECF8-4993-9157-3B6D9FB399B9}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "YTArchivingSetup", "YTArchivingSetup\YTArchivingSetup.vdproj", "{CBEB98CE-4EF9-4D28-916D-65295219339A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,8 +27,6 @@ Global
 		{2C27AA8D-ECF8-4993-9157-3B6D9FB399B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C27AA8D-ECF8-4993-9157-3B6D9FB399B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C27AA8D-ECF8-4993-9157-3B6D9FB399B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBEB98CE-4EF9-4D28-916D-65295219339A}.Debug|Any CPU.ActiveCfg = Debug
-		{CBEB98CE-4EF9-4D28-916D-65295219339A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
