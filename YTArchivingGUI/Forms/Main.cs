@@ -318,5 +318,11 @@ namespace YTArchivingGUI.Forms
                 LoadSaveManager.Save(configuration);
             }
         }
+
+        private void buttonOpenBinFolder_Click(object sender, EventArgs e)
+        {
+            string path = Path.Join(AppDomain.CurrentDomain.BaseDirectory, "ExternalBinaries");
+            System.Diagnostics.Process.Start("explorer.exe", path);
+        }
     }
 }

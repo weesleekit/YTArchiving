@@ -53,7 +53,7 @@ namespace YTArchivingTool
         /// <returns></returns>
         public async Task Download(string url, string folderPath, string basePath)
         {
-            string arguments = @$"-S ""res:1080,fps"" -o ""{folderPath}/%(upload_date>%Y-%m-%d)s %(id)s %(title)s.%(ext)s"" --download-archive ""{basePath}/archive.txt"" ""{url}"" --write-auto-sub --write-thumbnail";
+            string arguments = @$"-S ""res:1080,fps"" -o ""{folderPath}/%(upload_date>%Y-%m-%d)s %(title)s [%(id)s].%(ext)s"" --download-archive ""{basePath}/archive.txt"" ""{url}"" --write-auto-sub --write-thumbnail";
 
             ProcessStartInfo startInfo = new()
             {
