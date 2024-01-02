@@ -39,6 +39,7 @@
             textBoxOutputPath = new TextBox();
             label1 = new Label();
             buttonBrowseOutputPath = new Button();
+            buttonOpenBinFolder = new Button();
             SuspendLayout();
             // 
             // buttonNewFolder
@@ -144,11 +145,23 @@
             buttonBrowseOutputPath.UseVisualStyleBackColor = true;
             buttonBrowseOutputPath.Click += ButtonBrowseOutputPath_Click;
             // 
+            // buttonOpenBinFolder
+            // 
+            buttonOpenBinFolder.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonOpenBinFolder.Location = new Point(394, 12);
+            buttonOpenBinFolder.Name = "buttonOpenBinFolder";
+            buttonOpenBinFolder.Size = new Size(111, 23);
+            buttonOpenBinFolder.TabIndex = 14;
+            buttonOpenBinFolder.Text = "Open bin folder";
+            buttonOpenBinFolder.UseVisualStyleBackColor = true;
+            buttonOpenBinFolder.Click += buttonOpenBinFolder_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(517, 594);
+            Controls.Add(buttonOpenBinFolder);
             Controls.Add(buttonBrowseOutputPath);
             Controls.Add(label1);
             Controls.Add(textBoxOutputPath);
@@ -179,5 +192,6 @@
         private TextBox textBoxOutputPath;
         private Label label1;
         private Button buttonBrowseOutputPath;
+        private Button buttonOpenBinFolder;
     }
 }
